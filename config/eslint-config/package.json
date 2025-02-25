@@ -1,0 +1,17 @@
+{
+  "name": "@frontend-challenge/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "library.js",
+    "next.js"
+  ],
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
+    "@frontend-challenge/prettier": "workspace:*"
+  },
+  "prettier": "@frontend-challenge/prettier",
+  "eslintConfig": {
+    "extends": ["./library.js"]
+  }
+}
