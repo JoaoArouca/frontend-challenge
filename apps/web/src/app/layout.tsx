@@ -1,19 +1,20 @@
-import type { Metadata } from "next";
-import { ReactNode } from "react";
+import type { Metadata } from 'next'
+import { ReactNode } from 'react'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Frontend Challenge",
-  description: "Frontend Challenge",
-};
+  title: 'Frontend Challenge',
+  description: 'Frontend Challenge',
+}
 
 type RootLayoutProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body>{children}</body>
     </html>
-  );
+  )
 }
