@@ -6,12 +6,23 @@ export class ProductService {
   constructor(private readonly http: HttpService) {}
 
   async getProducts(
-    params: LoadProductsQueryParams,
+    { categories, limit, sort }: LoadProductsQueryParams,
     signal?: AbortSignal
   ): Promise<Product[]> {
-    return await this.http.get({
+    const response = await this.http.get<Product[]>({
       url: '/products',
-      params,
+      params: { categories, limit, sort },
+      signal,
+    })
+
+    return categories && categories.length > 0
+      ? response.filter((p) => categories.includes(p.category))
+      : response
+  }
+
+  async getProductsCategories(signal?: AbortSignal): Promise<string[]> {
+    return await this.http.get({
+      url: '/products/categories',
       signal,
     })
   }
