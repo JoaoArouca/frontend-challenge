@@ -6,12 +6,20 @@ export class ProductService {
   constructor(private readonly http: HttpService) {}
 
   async getProducts(signal?: AbortSignal): Promise<Product[]> {
-    const response = await this.http.get<Product[]>({
+    const response = await this.http.get<Product[], undefined>({
       url: '/products',
       signal,
     })
 
     return response
+  }
+
+  async getProductById(id: number, signal?: AbortSignal): Promise<Product> {
+    return await this.http.get<Product, { id: number }>({
+      url: `/products/${id}`,
+      params: { id },
+      signal,
+    })
   }
 
   async getProductsCategories(signal?: AbortSignal): Promise<string[]> {
@@ -27,7 +35,7 @@ export class ProductService {
   ): Promise<Product> {
     const parsedProduct = productSchema.parse(product)
 
-    return await this.http.post({
+    return await this.http.post<Product>({
       url: '/products',
       body: parsedProduct,
       signal,

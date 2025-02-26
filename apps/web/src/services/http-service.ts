@@ -8,16 +8,21 @@ export class AxiosHttpService implements HttpService {
     this.axiosInstance = axiosInstance
   }
 
-  async get<T>({ url, signal }: HttpGetParams): Promise<T> {
+  async get<T, P extends unknown>({
+    url,
+    signal,
+    params,
+  }: HttpGetParams<P>): Promise<T> {
     const response = await this.axiosInstance.get<T>(url, {
       signal,
+      params,
       paramsSerializer,
     })
     return response.data
   }
 
   async post<T>({ url, body, signal }: HttpPostParams): Promise<T> {
-    const response = await this.axiosInstance.post<T>(url, body, {
+    const response = await this.axiosInstance.post<T>(url, {
       signal,
       paramsSerializer,
     })
