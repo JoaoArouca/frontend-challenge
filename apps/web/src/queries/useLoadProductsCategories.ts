@@ -1,4 +1,4 @@
-import { makeProductService } from '@/factories/product-factory'
+import { makeProductService } from '@/services/product/factory'
 import { useQuery } from '@tanstack/react-query'
 import { PRODUCTS_QUERY_KEY } from './constants'
 

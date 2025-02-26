@@ -1,11 +1,10 @@
-export type HttpGetParams<P extends unknown> = {
+export type HttpGetParams = {
   url: string
-  params?: P
   signal?: AbortSignal
 }
 
 export type HttpService = {
-  get<T, P extends unknown>(params: HttpGetParams<P>): Promise<T>
+  get<T>(params: HttpGetParams): Promise<T>
   post<T>(url: string, data: unknown): Promise<T>
   put<T>(url: string, data: unknown): Promise<T>
   delete<T>(url: string): Promise<T>
