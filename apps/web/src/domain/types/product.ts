@@ -1,19 +1,9 @@
+import { z } from 'zod'
 import { CustomProductSort, ProductCategory } from '../enum/product'
+import { productRatingSchema, productSchema } from '../schemas/product'
 
-export type Product = {
-  id: number
-  title: string
-  price: number
-  description: string
-  category: ProductCategory
-  image: string
-  rating: ProductRating
-}
-
-export type ProductRating = {
-  rate: number
-  count: number
-}
+export type Product = z.infer<typeof productSchema>
+export type ProductRating = z.infer<typeof productRatingSchema>
 
 export type ProductFilters = {
   categories?: ProductCategory[]

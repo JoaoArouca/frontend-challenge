@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { HttpGetParams, HttpService } from './types'
+import { HttpGetParams, HttpPostParams, HttpService } from './types'
 import { paramsSerializer } from './utils'
 export class AxiosHttpService implements HttpService {
   private readonly axiosInstance: AxiosInstance
@@ -16,8 +16,11 @@ export class AxiosHttpService implements HttpService {
     return response.data
   }
 
-  async post<T>(url: string, data: unknown): Promise<T> {
-    const response = await this.axiosInstance.post<T>(url, data)
+  async post<T>({ url, body, signal }: HttpPostParams): Promise<T> {
+    const response = await this.axiosInstance.post<T>(url, body, {
+      signal,
+      paramsSerializer,
+    })
     return response.data
   }
 
