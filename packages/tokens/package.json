@@ -1,0 +1,28 @@
+{
+  "name": "@frontend-challenge/tokens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "lint": "eslint src/**/*.ts* --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@frontend-challenge/eslint-config": "workspace:*",
+    "@frontend-challenge/prettier": "workspace:*",
+    "@frontend-challenge/tsconfig": "workspace:*",
+    "tsup": "^8.4.0",
+    "typescript": "^5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@frontend-challenge/eslint-config"
+    ]
+  },
+  "prettier": "@frontend-challenge/prettier"
+}
