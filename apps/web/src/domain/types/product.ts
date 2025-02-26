@@ -1,4 +1,4 @@
-import { ProductCategory } from '../enum/product'
+import { CustomProductSort, ProductCategory } from '../enum/product'
 
 export type Product = {
   id: number
@@ -13,4 +13,9 @@ export type Product = {
 export type ProductRating = {
   rate: number
   count: number
+}
+
+export type ProductFilters = {
+  categories?: ProductCategory[]
+  customSort?: CustomProductSort
 }

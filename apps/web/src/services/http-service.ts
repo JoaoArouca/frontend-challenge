@@ -1,27 +1,6 @@
 import { AxiosInstance } from 'axios'
-import qs from 'qs'
-
-type HttpGetParams = {
-  url: string
-  params?: unknown
-  signal?: AbortSignal
-}
-
-const paramsSerializer = (params: unknown) => {
-  return qs.stringify(params, {
-    allowEmptyArrays: false,
-    skipNulls: true,
-    strictNullHandling: true,
-    arrayFormat: 'comma',
-  })
-}
-export type HttpService = {
-  get<T>(params: HttpGetParams): Promise<T>
-  post<T>(url: string, data: unknown): Promise<T>
-  put<T>(url: string, data: unknown): Promise<T>
-  delete<T>(url: string): Promise<T>
-}
-
+import { HttpGetParams, HttpService } from './types'
+import { paramsSerializer } from './utils'
 export class AxiosHttpService implements HttpService {
   private readonly axiosInstance: AxiosInstance
 
@@ -29,7 +8,11 @@ export class AxiosHttpService implements HttpService {
     this.axiosInstance = axiosInstance
   }
 
-  async get<T>({ url, params, signal }: HttpGetParams): Promise<T> {
+  async get<T, P extends unknown>({
+    url,
+    params,
+    signal,
+  }: HttpGetParams<P>): Promise<T> {
     const response = await this.axiosInstance.get<T>(url, {
       params,
       signal,

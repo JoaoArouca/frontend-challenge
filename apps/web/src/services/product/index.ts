@@ -1,21 +1,28 @@
 import { Product } from '@/domain/types/product'
-import { LoadProductsQueryParams } from '@/queries/useLoadProducts'
-import { HttpService } from './http-service'
+import { ProductQueryParams } from '@/queries/useLoadProducts'
+import { HttpService } from '../types'
+
+export type LoadProductsQueryParams = {
+  limit?: number
+  sort?: 'asc' | 'desc'
+}
 
 export class ProductService {
   constructor(private readonly http: HttpService) {}
 
   async getProducts(
-    { categories, limit, sort }: LoadProductsQueryParams,
+    filters: ProductQueryParams,
     signal?: AbortSignal
   ): Promise<Product[]> {
-    const response = await this.http.get<Product[]>({
+    const { categories = [], customSort, ...queryParams } = filters
+
+    const response = await this.http.get<Product[], LoadProductsQueryParams>({
       url: '/products',
-      params: { categories, limit, sort },
+      params: queryParams,
       signal,
     })
 
-    return categories && categories.length > 0
+    return categories.length > 0
       ? response.filter((p) => categories.includes(p.category))
       : response
   }
