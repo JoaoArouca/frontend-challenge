@@ -15,7 +15,9 @@
     "./components/card": "./src/components/card.tsx",
     "./components/badge": "./src/components/badge.tsx",
     "./components/skeleton": "./src/components/skeleton.tsx",
-    "./components/command": "./src/components/command.tsx"
+    "./components/command": "./src/components/command.tsx",
+    "./components/popover": "./src/components/popover.tsx",
+    "./components/multi-select": "./src/components/multi-select.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./globals.css -o ./dist/index.css",
