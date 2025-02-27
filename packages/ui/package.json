@@ -10,7 +10,8 @@
   ],
   "exports": {
     "./globals.css": "./dist/index.css",
-    "./components/button": "./src/components/button.tsx"
+    "./components/button": "./src/components/button.tsx",
+    "./components/dialog": "./src/components/dialog.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./globals.css -o ./dist/index.css",
@@ -40,6 +41,7 @@
   "prettier": "@frontend-challenge/prettier",
   "dependencies": {
     "@frontend-challenge/tokens": "workspace:*",
+    "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
