@@ -4,9 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import qs from 'qs'
 import { useMemo } from 'react'
 
-const DEFAULT_QUERY_PARAMS: ProductQueryParams = {
-  page: 1,
-  limit: 10,
+const DEFAULT_QUERY_PARAMS: Partial<ProductQueryParams> = {
   categories: [],
   customSort: undefined,
 }
@@ -41,17 +39,12 @@ export const useInitialProductsPageFilters = () => {
     ? (queryObject.customSort as CustomProductSort)
     : DEFAULT_QUERY_PARAMS.customSort
 
-  const page = Number(queryObject.page) || DEFAULT_QUERY_PARAMS.page
-  const limit = Number(queryObject.limit) || DEFAULT_QUERY_PARAMS.limit
-
-  const initialFilters: ProductQueryParams = useMemo(() => {
+  const initialFilters: Partial<ProductQueryParams> = useMemo(() => {
     return {
       categories,
       customSort,
-      page,
-      limit,
     }
-  }, [categories, customSort, page, limit])
+  }, [categories, customSort])
 
   return { initialFilters }
 }

@@ -1,15 +1,29 @@
 import { usePagination } from '@/hooks/usePagination'
 import { useLoadProducts } from '@/queries/useLoadProducts'
+import { useState } from 'react'
 import { useInitialProductsPageFilters } from './useInitialProductsPageFilters'
 
 export const useProductsPage = () => {
+  const [limit, setLimit] = useState<number>(8)
+  const [page, setPage] = useState<number>(1)
+
   const { initialFilters } = useInitialProductsPageFilters()
 
-  const { data: products, isLoading, isError } = useLoadProducts(initialFilters)
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useLoadProducts({
+    ...initialFilters,
+    page,
+    limit,
+  })
 
   const { items: paginatedProducts, ...pagination } = usePagination({
     items: products ?? [],
-    limit: initialFilters.limit,
+    limit,
+    currentPage: page,
+    setCurrentPage: setPage,
   })
 
   return {

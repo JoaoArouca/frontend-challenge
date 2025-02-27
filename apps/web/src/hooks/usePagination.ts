@@ -1,17 +1,17 @@
 import { PaginatedResponse } from '@/domain/types/common'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 type UsePaginationProps<T> = {
   items: T[]
   limit?: number
+  currentPage: number
+  setCurrentPage: (page: number) => void
 }
 
 export const usePagination = <T>(
   props: UsePaginationProps<T>
 ): PaginatedResponse<T> => {
-  const { items, limit = 20 } = props
-
-  const [currentPage, setCurrentPage] = useState(1)
+  const { items, limit = 20, currentPage, setCurrentPage } = props
 
   const totalPages = useMemo(
     () => Math.ceil(items.length / limit),
