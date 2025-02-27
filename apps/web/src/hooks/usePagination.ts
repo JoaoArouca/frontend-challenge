@@ -23,9 +23,7 @@ export const usePagination = <T>(
     return items.slice(start, start + limit)
   }, [items, currentPage, limit])
 
-  const nextPage = () =>
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1))
+  const onPageChange = (page: number) => setCurrentPage(page)
 
   return {
     items: paginatedItems,
@@ -33,7 +31,6 @@ export const usePagination = <T>(
     currentPage,
     limit,
     totalPages,
-    nextPage,
-    prevPage,
+    onPageChange,
   }
 }

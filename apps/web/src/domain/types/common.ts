@@ -9,6 +9,5 @@ export type PaginatedResponse<T> = {
   currentPage: number
   limit: number
   totalPages: number
-  nextPage: () => void
-  prevPage: () => void
+  onPageChange: (page: number) => void
 }

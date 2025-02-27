@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@frontend-challenge/ui": "workspace:*",
     "@frontend-challenge/tokens": "workspace:*",
+    "@frontend-challenge/ui": "workspace:*",
     "@tanstack/react-query": "^5.66.9",
     "axios": "^1.7.9",
+    "lucide-react": "^0.476.0",
     "next": "15.1.7",
     "qs": "^6.14.0",
     "react": "^19.0.0",

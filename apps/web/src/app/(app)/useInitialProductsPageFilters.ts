@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 
 const DEFAULT_QUERY_PARAMS: ProductQueryParams = {
   page: 1,
-  limit: 20,
+  limit: 10,
   categories: [],
   customSort: undefined,
 }
