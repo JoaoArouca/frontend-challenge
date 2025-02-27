@@ -1,7 +1,7 @@
 'use client'
 
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 
 import { queryClient } from '@/lib/react-query'
 
@@ -11,6 +11,8 @@ type ProvidersProps = {
 
 export function Providers({ children }: ProvidersProps) {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+    </QueryClientProvider>
   )
 }
