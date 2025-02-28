@@ -1,7 +1,7 @@
-import { CustomProductSort } from '@/domain/enum/product'
+import { CustomProductSort, ProductCategory } from '@/domain/enum/product'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
-import { getProductSortLabel } from './utils'
+import { getProductCategoryLabel, getProductSortLabel } from './utils'
 
 type Option = {
   label: string
@@ -20,6 +20,13 @@ export const useProductFilter = () => {
     }))
   }, [])
 
+  const categoryOptions = useMemo<Option[]>(() => {
+    return Object.values(ProductCategory).map((category) => ({
+      label: getProductCategoryLabel(category),
+      value: category,
+    }))
+  }, [])
+
   const onSelectSort = (sort: CustomProductSort) => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -32,8 +39,22 @@ export const useProductFilter = () => {
     replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
+  const onSelectCategory = (categories: ProductCategory[]) => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    if (categories.length > 0) {
+      params.set('categories', JSON.stringify(categories))
+    } else {
+      params.delete('categories')
+    }
+
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
   return {
     sortOptions,
     onSelectSort,
+    categoryOptions,
+    onSelectCategory,
   }
 }

@@ -1,24 +1,41 @@
+'use client'
+
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
-export function useFilters<T extends Record<string, any>>() {
+/**
+ * A hook that extracts URL search parameters and converts them to a typed object
+ * @template T The type of filters to extract
+ * @returns A Partial<T> object with only the fields that are present in the URL
+ */
+export function useFilters<T extends Record<string, any>>(): Partial<T> {
   const searchParams = useSearchParams()
 
-  return useMemo<Partial<T>>(() => {
-    const params = new URLSearchParams(searchParams)
+  const parseValue = useMemo(
+    () =>
+      (value: string): any => {
+        try {
+          return JSON.parse(value)
+        } catch (e) {
+          return value
+        }
+      },
+    []
+  )
 
-    if (!params.toString()) return {}
+  const filters = useMemo(() => {
+    const result: Partial<T> = {}
 
-    return Array.from(params.entries()).reduce((acc, [key, value]) => {
-      if (value.includes(',')) {
-        acc[key as keyof T] = value.split(',') as T[keyof T]
-      } else if (!isNaN(Number(value))) {
-        acc[key as keyof T] = Number(value) as T[keyof T]
-      } else {
-        acc[key as keyof T] = value as T[keyof T]
-      }
+    if (searchParams) {
+      searchParams.forEach((value, key) => {
+        if (value) {
+          result[key as keyof T] = parseValue(value)
+        }
+      })
+    }
 
-      return acc
-    }, {} as Partial<T>)
-  }, [searchParams])
+    return result
+  }, [searchParams, parseValue])
+
+  return filters
 }
