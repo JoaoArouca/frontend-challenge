@@ -1,14 +1,20 @@
 import { productSchema } from '@/domain/schemas/product'
 import { Product } from '@/domain/types/product'
+import { useCreateProduct } from '@/queries/useCreateProduct'
 import { Button } from '@frontend-challenge/ui/components/button'
 import { Form } from '@frontend-challenge/ui/components/form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PlusCircle } from 'lucide-react'
+import { Loader, PlusCircle } from 'lucide-react'
+import { Fragment } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { PRODUCT_FORM_FIELDS } from './constants'
 import { ProductFormField } from './form-field'
 
 export const CreateProductForm = () => {
+  const { isPending: isCreatingProduct, mutateAsync: createProduct } =
+    useCreateProduct()
+
   const form = useForm<Product>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -21,10 +27,15 @@ export const CreateProductForm = () => {
     },
   })
 
-  const onSubmit = (data: Product) => {
-    console.log('Produto enviado:', data)
+  const onSubmit = async (data: Product) => {
+    try {
+      await createProduct(data)
+      toast.success('Produto adicionado com sucesso! 🎉')
+      form.reset()
+    } catch (error) {
+      toast.error('Erro ao adicionar o produto. Tente novamente.')
+    }
   }
-  console.log(form.formState.errors)
 
   return (
     <Form {...form}>
@@ -41,11 +52,25 @@ export const CreateProductForm = () => {
         </div>
 
         <div className="flex justify-end gap-2">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => form.reset()}
+            disabled={isCreatingProduct}
+          >
             Cancelar
           </Button>
-          <Button type="submit">
-            <PlusCircle size={16} /> Adicionar Produto
+          <Button type="submit" disabled={isCreatingProduct}>
+            {isCreatingProduct ? (
+              <Fragment>
+                <Loader className="animate-spin" size={16} /> Adicionando
+                Produto
+              </Fragment>
+            ) : (
+              <Fragment>
+                <PlusCircle size={16} /> Adicionar Produto
+              </Fragment>
+            )}
           </Button>
         </div>
       </form>
