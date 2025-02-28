@@ -22,8 +22,10 @@ export class AxiosHttpService implements HttpService {
   }
 
   async post<T>({ url, body, signal }: HttpPostParams): Promise<T> {
+    debugger
     const response = await this.axiosInstance.post<T>(url, {
       signal,
+      body,
       paramsSerializer,
     })
     return response.data

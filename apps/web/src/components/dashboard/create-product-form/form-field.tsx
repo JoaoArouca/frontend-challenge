@@ -53,8 +53,11 @@ export const ProductFormField = ({
         {...field}
         value={field.value || ''}
         min={0}
+        step="any"
         onChange={(e) =>
-          field.onChange(e.target.value === '' ? '' : Number(e.target.value))
+          field.onChange(
+            e.target.value === '' ? '' : parseFloat(e.target.value)
+          )
         }
         className={`${fieldState.error && 'border-none ring-1 ring-red-500 focus-visible:ring-1 focus-visible:ring-red-500'}`}
       />
