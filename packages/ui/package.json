@@ -18,7 +18,8 @@
     "./components/command": "./src/components/command.tsx",
     "./components/popover": "./src/components/popover.tsx",
     "./components/multi-select": "./src/components/multi-select.tsx",
-    "./components/select": "./src/components/select.tsx"
+    "./components/select": "./src/components/select.tsx",
+    "./components/table": "./src/components/table.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./globals.css -o ./dist/index.css",
