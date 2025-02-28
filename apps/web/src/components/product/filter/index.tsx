@@ -1,5 +1,6 @@
 import { ProductCategory } from '@/domain/enum/product'
 import { ProductFilters } from '@/domain/types/product'
+import { Button } from '@frontend-challenge/ui/components/button'
 import { MultiSelect } from '@frontend-challenge/ui/components/multi-select'
 import {
   Select,
@@ -9,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@frontend-challenge/ui/components/select'
+import { X } from 'lucide-react'
 import { useProductFilter } from './useProductFilter'
 
 type ProductFilterProps = {
@@ -16,8 +18,14 @@ type ProductFilterProps = {
 }
 
 export const ProductFilter = ({ filters }: ProductFilterProps) => {
-  const { sortOptions, onSelectSort, categoryOptions, onSelectCategory } =
-    useProductFilter()
+  const {
+    sortOptions,
+    onSelectSort,
+    categoryOptions,
+    onSelectCategory,
+    hadActiveFilters,
+    resetFilters,
+  } = useProductFilter({ filters })
 
   return (
     <div className="flex justify-start gap-4">
@@ -46,6 +54,15 @@ export const ProductFilter = ({ filters }: ProductFilterProps) => {
           </SelectGroup>
         </SelectContent>
       </Select>
+
+      {hadActiveFilters && (
+        <Button variant="default" onClick={resetFilters}>
+          <span className="flex items-center gap-2">
+            <X size={16} />
+            Remover filtros
+          </span>
+        </Button>
+      )}
     </div>
   )
 }

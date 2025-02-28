@@ -1,4 +1,5 @@
 import { CustomProductSort, ProductCategory } from '@/domain/enum/product'
+import { ProductFilters } from '@/domain/types/product'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import { getProductCategoryLabel, getProductSortLabel } from './utils'
@@ -8,7 +9,11 @@ type Option = {
   value: string
 }
 
-export const useProductFilter = () => {
+type UseProductFilterProps = {
+  filters: ProductFilters
+}
+
+export const useProductFilter = ({ filters }: UseProductFilterProps) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -51,10 +56,23 @@ export const useProductFilter = () => {
     replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
+  const hadActiveFilters = useMemo(() => {
+    return Object.keys(filters).length > 0
+  }, [filters])
+
+  const resetFilters = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('categories')
+    params.delete('customSort')
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
   return {
     sortOptions,
     onSelectSort,
     categoryOptions,
     onSelectCategory,
+    hadActiveFilters,
+    resetFilters,
   }
 }
