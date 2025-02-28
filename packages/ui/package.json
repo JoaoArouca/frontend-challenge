@@ -20,7 +20,9 @@
     "./components/multi-select": "./src/components/multi-select.tsx",
     "./components/select": "./src/components/select.tsx",
     "./components/table": "./src/components/table.tsx",
-    "./components/input": "./src/components/input.tsx"
+    "./components/input": "./src/components/input.tsx",
+    "./components/label": "./src/components/label.tsx",
+    "./components/form": "./src/components/form.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./globals.css -o ./dist/index.css",
@@ -50,7 +52,9 @@
   "prettier": "@frontend-challenge/prettier",
   "dependencies": {
     "@frontend-challenge/tokens": "workspace:*",
+    "@hookform/resolvers": "^4.1.2",
     "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-popover": "^1.1.6",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
@@ -58,7 +62,9 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
     "lucide-react": "^0.476.0",
+    "react-hook-form": "^7.54.2",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.2"
   }
 }
