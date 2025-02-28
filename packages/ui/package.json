@@ -17,7 +17,8 @@
     "./components/skeleton": "./src/components/skeleton.tsx",
     "./components/command": "./src/components/command.tsx",
     "./components/popover": "./src/components/popover.tsx",
-    "./components/multi-select": "./src/components/multi-select.tsx"
+    "./components/multi-select": "./src/components/multi-select.tsx",
+    "./components/select": "./src/components/select.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./globals.css -o ./dist/index.css",
@@ -49,6 +50,7 @@
     "@frontend-challenge/tokens": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-popover": "^1.1.6",
+    "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

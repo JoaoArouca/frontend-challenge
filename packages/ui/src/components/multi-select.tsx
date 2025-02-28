@@ -15,6 +15,7 @@ type Option = {
 }
 
 interface MultiSelectProps {
+  placeholder?: string
   options: Option[]
   selected: string[]
   onChange: (selected: string[]) => void
@@ -26,6 +27,7 @@ export function MultiSelect({
   selected,
   onChange,
   className,
+  placeholder = 'Select options',
 }: MultiSelectProps) {
   const [open, setOpen] = React.useState(false)
 
@@ -54,7 +56,7 @@ export function MultiSelect({
                 )}
               </>
             ) : (
-              'Select categories...'
+              placeholder
             )}
           </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
