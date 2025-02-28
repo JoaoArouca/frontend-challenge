@@ -27,12 +27,14 @@ type ProductFormFieldProps = {
   form: any
   fieldKey: keyof Product
   config: FormFieldType
+  isEditing: boolean
 }
 
 export const ProductFormField = ({
   form,
   fieldKey,
   config,
+  isEditing,
 }: ProductFormFieldProps) => {
   const fieldRenderers: Record<
     FieldType,
@@ -63,7 +65,11 @@ export const ProductFormField = ({
       />
     ),
     select: (field, config) => (
-      <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <Select
+        onValueChange={field.onChange}
+        defaultValue={field.value}
+        disabled={isEditing}
+      >
         <SelectTrigger>
           <SelectValue placeholder={config.placeholder} />
         </SelectTrigger>
