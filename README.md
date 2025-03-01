@@ -29,9 +29,10 @@ O projeto é organizado como um **monorepo** usando **Turborepo**, permitindo o 
 │   ├── storybook        # Documentação de componentes
 │
 ├── packages
-│   ├── ui               # Componentes reutilizáveis (Button, Table, Skeleton, etc.)
-│   ├── config           # Configurações globais (Design Tokens, eslint, tailwind, etc.)
-│   ├── utils            # Funções auxiliares reutilizáveis
+│   ├── ui               # Componentes reutilizáveis (Button, Table, Input, FormFields, etc.)
+│   ├── tokens           # Design Tokens
+│
+├── Config               # Configurações globais (eslint, prettier, tsconfig, etc.)
 │
 ├── .turbo               # Cache do Turborepo
 ├── .github              # Configurações do GitHub (CI/CD, PR templates, etc.)
@@ -100,25 +101,7 @@ pnpm test
 
 ## 🚀 Deploy
 
-O projeto está configurado para **deploy automático na Vercel**. Para configurar manualmente:
-
-1. Criar uma conta na [Vercel](https://vercel.com/)
-2. Importar o repositório do GitHub
-3. Configurar a **Root Directory** para `apps/web`
-4. Adicionar as variáveis de ambiente necessárias (se houver)
-5. Deploy será feito automaticamente a cada push na branch `main`
-
----
-
-## 📜 Critérios Atendidos do Desafio
-
-- ✅ Código organizado seguindo **princípios SOLID**
-- ✅ Utilização de **React Query** para requisições assíncronas
-- ✅ **Formulários validados** com **Zod**
-- ✅ **30% de cobertura de testes unitários** com Jest
-- ✅ **Monorepo estruturado** com Turborepo
-- ✅ **Storybook para documentação de componentes**
-- ✅ **Boas práticas de UX/UI** utilizando Radix Primitives
+O projeto também pode ser acessado pelo deploy na [Vercel](https://frontend-challenge-web.vercel.app/):
 
 ---
 
