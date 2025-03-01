@@ -1,3 +1,4 @@
+import { getProductCategoryLabel } from '@/components/product/filter/utils'
 import { Product } from '@/domain/types/product'
 import { Button } from '@frontend-challenge/ui/components/button'
 import { Skeleton } from '@frontend-challenge/ui/components/skeleton'
@@ -58,6 +59,9 @@ export const DashboardTable = ({
               Nome
             </TableHead>
             <TableHead className="p-2 text-left font-medium text-gray-600">
+              Categoria
+            </TableHead>
+            <TableHead className="p-2 text-left font-medium text-gray-600">
               Preço
             </TableHead>
             <TableHead className="p-2 text-left font-medium text-gray-600">
@@ -76,6 +80,9 @@ export const DashboardTable = ({
                 className="flex cursor-pointer items-center justify-start gap-4 p-2 text-gray-700"
               >
                 {product.title} <PencilIcon size={12} />
+              </TableCell>
+              <TableCell className="p-2 font-semibold text-gray-700">
+                {getProductCategoryLabel(product.category)}
               </TableCell>
               <TableCell className="justify-end p-2 font-semibold text-gray-700">
                 ${product.price.toFixed(2)}
