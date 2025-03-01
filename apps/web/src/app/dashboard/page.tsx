@@ -35,6 +35,10 @@ export default function DashboardPage() {
     setSelectedProduct(null)
   }
 
+  const onDeleteProduct = (product: Product) => {
+    console.log(product)
+  }
+
   return (
     <div className="container mx-auto flex flex-col gap-y-4 px-4 py-8">
       <Header>
@@ -59,6 +63,7 @@ export default function DashboardPage() {
         products={products}
         isLoading={isLoadingProducts}
         onRowClick={openDrawer}
+        onDeleteAction={onDeleteProduct}
       />
 
       <Pagination
