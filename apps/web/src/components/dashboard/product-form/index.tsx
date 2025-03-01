@@ -1,9 +1,11 @@
 import { productSchema } from '@/domain/schemas/product'
 import { Product } from '@/domain/types/product'
 import { useCreateProduct } from '@/queries/useCreateProduct'
+import { useUpdateProduct } from '@/queries/useUpdateProducts'
 import { Button } from '@frontend-challenge/ui/components/button'
 import { Form } from '@frontend-challenge/ui/components/form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { PRODUCT_FORM_FIELDS } from './constants'
@@ -20,6 +22,9 @@ export const ProductForm = ({ onSuccess, initialValue }: ProductFormProps) => {
   const { isPending: isCreatingProduct, mutateAsync: createProduct } =
     useCreateProduct()
 
+  const { isPending: isUpdatingProduct, mutateAsync: updateProduct } =
+    useUpdateProduct()
+
   const form = useForm<Product>({
     resolver: zodResolver(productSchema),
     defaultValues: initialValue || {
@@ -35,7 +40,7 @@ export const ProductForm = ({ onSuccess, initialValue }: ProductFormProps) => {
   const onSubmit = async (data: Product) => {
     try {
       if (isEditing) {
-        await createProduct({ ...initialValue, ...data })
+        await updateProduct({ ...initialValue, ...data })
       } else {
         await createProduct(data)
       }
@@ -46,6 +51,11 @@ export const ProductForm = ({ onSuccess, initialValue }: ProductFormProps) => {
       toast.error('Erro ao salvar produto. Tente novamente.')
     }
   }
+
+  const hasLoadingState = useMemo<boolean>(
+    () => isCreatingProduct || isUpdatingProduct,
+    [isCreatingProduct, isUpdatingProduct]
+  )
 
   return (
     <Form {...form}>
@@ -67,11 +77,11 @@ export const ProductForm = ({ onSuccess, initialValue }: ProductFormProps) => {
             type="button"
             variant="outline"
             onClick={() => form.reset()}
-            disabled={isCreatingProduct}
+            disabled={hasLoadingState}
           >
             Cancelar
           </Button>
-          <Button type="submit" disabled={isCreatingProduct}>
+          <Button type="submit" disabled={hasLoadingState}>
             {isEditing ? 'Salvar Alterações' : 'Criar Produto'}
           </Button>
         </div>

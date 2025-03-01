@@ -41,4 +41,16 @@ export class ProductService {
       signal,
     })
   }
+
+  async updateProduct(
+    product: Product,
+    signal?: AbortSignal
+  ): Promise<Product> {
+    const parsedProduct = productSchema.parse(product)
+    return await this.http.put<Product>({
+      url: `/products/${product.id}`,
+      body: parsedProduct,
+      signal,
+    })
+  }
 }
