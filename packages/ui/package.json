@@ -5,9 +5,7 @@
     "**/*.css"
   ],
   "private": true,
-  "files": [
-    "dist"
-  ],
+  "files": ["globals.css", "dist", "src"],
   "exports": {
     "./globals.css": "./dist/index.css",
     "./components/button": "./src/components/button.tsx",
