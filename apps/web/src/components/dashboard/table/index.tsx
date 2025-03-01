@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@frontend-challenge/ui/components/table'
-import { PencilIcon, Trash } from 'lucide-react'
+import { PencilIcon, Star, Trash } from 'lucide-react'
 
 type DashboardTableProps = {
   products: Product[]
@@ -62,6 +62,9 @@ export const DashboardTable = ({
               Categoria
             </TableHead>
             <TableHead className="p-2 text-left font-medium text-gray-600">
+              Avaliação
+            </TableHead>
+            <TableHead className="p-2 text-left font-medium text-gray-600">
               Preço
             </TableHead>
             <TableHead className="p-2 text-left font-medium text-gray-600">
@@ -83,6 +86,9 @@ export const DashboardTable = ({
               </TableCell>
               <TableCell className="p-2 font-semibold text-gray-700">
                 {getProductCategoryLabel(product.category)}
+              </TableCell>
+              <TableCell className="inline-flex  items-center gap-2 p-2 font-semibold text-gray-700">
+                <Star size={12} /> {product.rating.rate}
               </TableCell>
               <TableCell className="justify-end p-2 font-semibold text-gray-700">
                 ${product.price.toFixed(2)}
