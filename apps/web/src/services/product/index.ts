@@ -53,4 +53,8 @@ export class ProductService {
       signal,
     })
   }
+
+  async deleteProduct(product: Product): Promise<Product> {
+    return await this.http.delete<Product>(`/products/${product.id}`)
+  }
 }

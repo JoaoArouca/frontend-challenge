@@ -1,6 +1,7 @@
 import { Product, ProductFilters } from '@/domain/types/product'
 import { useFilters } from '@/hooks/useFilters'
 import { usePagination } from '@/hooks/usePagination'
+import { useDeleteProduct } from '@/queries/useDeleteProduct'
 import { useLoadProducts } from '@/queries/useLoadProducts'
 import { useCallback, useState } from 'react'
 
@@ -29,11 +30,15 @@ export const useProductsPage = () => {
     setCart((prevCart) => [...prevCart, product])
   }, [])
 
+  const { mutateAsync: deleteProduct, isPending: isDeletingProduct } =
+    useDeleteProduct()
+
   return {
     products: paginatedProducts,
     isLoading,
     filters,
     handleAddToCart,
+    deleteProduct,
     ...pagination,
   }
 }

@@ -13,6 +13,7 @@ export default function ProductPage() {
     isLoading: isLoadingProducts,
     filters,
     handleAddToCart,
+    deleteProduct,
     ...pagination
   } = useProductsPage()
 
